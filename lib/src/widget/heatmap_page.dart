@@ -73,6 +73,12 @@ class HeatMapPage extends StatelessWidget {
   /// Paratmeter gives clicked [DateTime] value.
   final Function(DateTime)? onClick;
 
+  /// This bool decides if the week text (The First COLUMN) will be displayed or not
+  final bool showWeekText;
+
+  /// This bool decides if the month text (The First ROW) will be displayed or not
+  final bool showMonthText;
+
   final bool? showText;
 
   HeatMapPage({
@@ -90,6 +96,8 @@ class HeatMapPage extends StatelessWidget {
     this.onClick,
     this.margin,
     this.showText,
+    this.showWeekText = true,
+    this.showMonthText = true,
   })  : _dateDifferent = endDate.difference(startDate).inDays,
         maxValue = DatasetsUtil.getMaxValue(datasets),
         super(key: key);
@@ -147,23 +155,25 @@ class HeatMapPage extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             // Show week labels to left side of heatmap.
-            HeatMapWeekText(
-              margin: margin,
-              fontSize: fontSize,
-              size: size,
-              fontColor: textColor,
-            ),
+            if (showWeekText)
+              HeatMapWeekText(
+                margin: margin,
+                fontSize: fontSize,
+                size: size,
+                fontColor: textColor,
+              ),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 // Show month labels to top of heatmap.
-                HeatMapMonthText(
-                  firstDayInfos: _firstDayInfos,
-                  margin: margin,
-                  fontSize: fontSize,
-                  fontColor: textColor,
-                  size: size,
-                ),
+                if (showMonthText)
+                  HeatMapMonthText(
+                    firstDayInfos: _firstDayInfos,
+                    margin: margin,
+                    fontSize: fontSize,
+                    fontColor: textColor,
+                    size: size,
+                  ),
 
                 // Heatmap itself.
                 Row(

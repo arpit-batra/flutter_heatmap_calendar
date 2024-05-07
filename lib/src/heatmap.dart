@@ -87,6 +87,12 @@ class HeatMap extends StatefulWidget {
   /// The double value of [HeatMapColorTip]'s tip container's size.
   final double? colorTipSize;
 
+  /// To display Month Text or not
+  final bool showMonthText;
+
+  /// To display Week Text or not
+  final bool showWeekText;
+
   const HeatMap({
     Key? key,
     required this.colorsets,
@@ -107,6 +113,8 @@ class HeatMap extends StatefulWidget {
     this.colorTipHelper,
     this.colorTipCount,
     this.colorTipSize,
+    this.showMonthText = true,
+    this.showWeekText = true,
   }) : super(key: key);
 
   @override
@@ -146,6 +154,8 @@ class _HeatMap extends State<HeatMap> {
           onClick: widget.onClick,
           margin: widget.margin,
           showText: widget.showText,
+          showMonthText: widget.showMonthText,
+          showWeekText: widget.showWeekText,
         )),
 
         // Show HeatMapColorTip if showColorTip is true.
